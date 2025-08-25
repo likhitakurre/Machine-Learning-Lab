@@ -6,7 +6,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
 
-# ------------------ A1: Intraclass Spread and Interclass Distance ------------------
+#A1. Evaluate the intraclass spread and interclass distances between the classes in your dataset. If your data deals with multiple classes,
+# you can take any two classes #
 def analyze_class_spread_and_distance(X, y, class1=0, class2=1):
     X1 = X[y == class1]
     X2 = X[y == class2]
@@ -24,7 +25,9 @@ def analyze_class_spread_and_distance(X, y, class1=0, class2=1):
     print(f"Class {class2} - Centroid: {centroid2}, Spread: {spread2}")
     print(f"Interclass Distance: {interclass_dist:.4f}\n")
 
-# ------------------ A2: Feature Density Analysis ------------------
+# A2. Take any feature from your dataset. Observe the density pattern for that feature by plotting the 
+# histogram. Use buckets (data in ranges) for histogram generation and study. Calculate the mean and 
+# variance from the available data. 
 def analyze_feature_density(X, feature_index=0):
     feature = X[:, feature_index]
     mean = np.mean(feature)
@@ -39,7 +42,8 @@ def analyze_feature_density(X, feature_index=0):
     plt.grid(True)
     plt.show()
 
-# ------------------ A3: Minkowski Distance Plot ------------------
+# A3. Take any two feature vectors from your dataset. Calculate the Minkwoski distance with r from 1 
+# to 10. Make a plot of the distance and observe the nature of this graph. 
 def minkowski_distance_plot(X, idx1=0, idx2=1):
     vec1 = X[idx1]
     vec2 = X[idx2]
@@ -56,7 +60,8 @@ def minkowski_distance_plot(X, idx1=0, idx2=1):
     plt.grid(True)
     plt.show()
 
-# ------------------ A4: Train/Test Split ------------------
+# A4. Divide dataset in your project into two parts – train & test set. To accomplish this, use the train
+#test_split() function available in SciKit. 
 def perform_train_test_split(X, y, class1=0, class2=1, test_size=0.3):
     mask = np.isin(y, [class1, class2])
     X_filtered = X[mask]
@@ -65,7 +70,11 @@ def perform_train_test_split(X, y, class1=0, class2=1, test_size=0.3):
     print(f"A4: Train/Test Split Done - Train: {X_train.shape[0]}, Test: {X_test.shape[0]}")
     return X_train, X_test, y_train, y_test
 
-# ------------------ A5/A6/A7: kNN Training, Testing and Prediction ------------------
+# A5 Train a kNN classifier (k =3) using the training set obtained from above exercise.
+# A6 Test the accuracy of the kNN using the test set obtained from above exercise
+# A7. Use the predict() function to study the prediction behavior of the classifier for test vectors. 
+#Perform classification for a given vector using neigh.predict(<<test_vect>>). This shall produce the 
+#class of the test vector (test_vect is any feature vector from your test set).
 def train_and_test_knn(X_train, X_test, y_train, y_test, k=3):
     model = KNeighborsClassifier(n_neighbors=k)
     model.fit(X_train, y_train)
@@ -76,8 +85,8 @@ def train_and_test_knn(X_train, X_test, y_train, y_test, k=3):
     print(f"A6: Accuracy with k={k}: {accuracy:.4f}")
     print(f"A7: Predictions on test set:\n{predictions}")
     return model, accuracy, predictions
-
-# ------------------ A8: Accuracy vs K Plot ------------------
+# A8. Make k = 1 to implement NN classifier and compare the results with kNN (k = 3). Vary k from 1 to 
+# 11 and make an accuracy plot. 
 def accuracy_vs_k_plot(X_train, X_test, y_train, y_test, max_k=11):
     ks = list(range(1, max_k+1))
     accuracies = []
@@ -97,7 +106,9 @@ def accuracy_vs_k_plot(X_train, X_test, y_train, y_test, max_k=11):
 
     print(f"A8: Accuracy scores for k=1 to {max_k}:\n{accuracies}")
 
-# ------------------ A9: Confusion Matrix & Report ------------------
+# A9. Please evaluate confusion matrix for your classification problem. From confusion matrix, the 
+#other performance metrics such as precision, recall and F1-Score measures for both training and test 
+#data. Based on your observations, infer the models learning outcome (underfit / regularfit / overfit). 
 def evaluate_model(model, X_train, y_train, X_test, y_test):
     print("A9: Evaluation Metrics")
     y_train_pred = model.predict(X_train)
@@ -141,3 +152,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
