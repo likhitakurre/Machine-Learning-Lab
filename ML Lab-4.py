@@ -15,7 +15,9 @@ def load_and_split_data():
         digits.data, digits.target, test_size=0.2, random_state=42)
     return X_train, X_test, y_train, y_test, digits
 
-
+# A1. Please evaluate confusion matrix for your classification problem. From confusion matrix, the 
+#other performance metrics such as precision, recall and F1-Score measures for both training and test 
+#data. Based on your observations, infer the models learning outcome (underfit / regularfit / overfit). 
 def evaluate_classification(knn, X_train, X_test, y_train, y_test):
     y_train_pred = knn.predict(X_train)
     y_test_pred = knn.predict(X_test)
@@ -24,7 +26,8 @@ def evaluate_classification(knn, X_train, X_test, y_train, y_test):
     print("\nTrain Classification Report:\n", classification_report(y_train, y_train_pred))
     print("\nTest Classification Report:\n", classification_report(y_test, y_test_pred))
 
-
+# A2. Calculate MSE, RMSE, MAPE and R2 scores for the price prediction exercise done in Lab 02. 
+# Analyse the results. 
 def regression_analysis(X, y):
     X_reg = np.mean(X, axis=1).reshape(-1, 1)
     X_train, X_test, y_train, y_test = train_test_split(X_reg, y, test_size=0.2, random_state=42)
@@ -37,7 +40,10 @@ def regression_analysis(X, y):
     r2 = r2_score(y_test, y_pred)
     print(f"MSE: {mse:.2f}, RMSE: {rmse:.2f}, MAPE: {mape:.2f}, R2 Score: {r2:.2f}")
 
-
+# A3. Generate 20 data points (training set data) consisting of 2 features (X & Y) whose values vary 
+#randomly between 1 & 10. Based on the values, assign these 20 points to 2 different classes (class0 - 
+#Blue & class1 – Red). Make a scatter plot of the training data and color the points as per their class 
+# color. Observe the plot. 
 def generate_2D_class_data():
     X = np.random.uniform(1, 10, (20, 2))
     y = np.random.choice([0, 1], 20)
@@ -49,7 +55,11 @@ def generate_2D_class_data():
     plt.show()
     return X, y
 
-
+# A4. Generate test set data with values of X & Y varying between 0 and 10 with increments of 0.1. 
+# This creates a test set of about 10,000 points. Classify these points with above training data using 
+#kNN classifier (k = 3). Make a scatter plot of the test data output with test points colored as per their 
+#predicted class colors (all points predicted class0 are labeled blue color). Observe the color spread 
+#and class boundary lines in the feature space.
 def classify_and_plot(X_train, y_train, k):
     x_vals = np.arange(0, 10.1, 0.1)
     y_vals = np.arange(0, 10.1, 0.1)
@@ -64,7 +74,8 @@ def classify_and_plot(X_train, y_train, k):
     plt.grid(True)
     plt.show()
 
-
+# A5. Repeat A4 exercise for various values of k and observe the change in the class boundary lines.
+# A6. Repeat the exercises A3 to A5 for your project data considering any two features and classes. 
 def pca_and_plot(digits):
     pca = PCA(n_components=2)
     X_pca = pca.fit_transform(digits.data)
@@ -76,7 +87,8 @@ def pca_and_plot(digits):
     plt.ylabel("PCA2")
     plt.grid(True)
     plt.show()
-
+# A7. Use RandomSearchCV() or GridSearchCV() operations to find the ideal ‘k’ value for your 
+# kNN classifier. This is called hyper-parameter tuning.
 
 def hyperparameter_tuning(X_train, y_train):
     param_grid = {'n_neighbors': list(range(1, 20))}
@@ -109,3 +121,4 @@ if __name__ == "__main__":
 
     print("\n--- A7: Hyperparameter Tuning ---")
     hyperparameter_tuning(X_train, y_train)
+
