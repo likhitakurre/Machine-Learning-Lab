@@ -26,7 +26,9 @@ def load_regression_data():
     data = load_diabetes(as_frame=True)
     return data.frame, data.target
 
-
+# A1. If your project deals with a regression problem, please use one attribute of your dataset 
+#(X_train) along with the target values (y_train) for training a linear regression model. Sample code 
+#suggested below.
 # ---------------------- Q1: Regression + Logistic Classification ----------------------
 def regression_and_classification():
     # Regression (Diabetes dataset)
@@ -54,7 +56,8 @@ def regression_and_classification():
     print("Accuracy:", accuracy_score(y_clf, y_pred_clf))
     print("First 10 Predictions:", y_pred_clf[:10])
 
-
+# A2. Calculate MSE, RMSE, MAPE and R2 scores for prediction made by the trained model in A1.  
+# Perform prediction on the test data and compare the metric values between train and test set.
 # ---------------------- Q2: KNN Classification ----------------------
 def knn_classification():
     df_cls, _ = load_classification_data()
@@ -81,7 +84,7 @@ def knn_classification():
     print("\n=== KNN Performance Metrics (Iris dataset) ===")
     print(metrics_df)
 
-
+# A3. Repeat the exercises A1 and A2 with more than one attribute or all attributes.
 # ---------------------- Q3: Linear Regression with all numeric ----------------------
 def linear_regression_all():
     df, target = load_regression_data()
@@ -101,7 +104,8 @@ def linear_regression_all():
     print("Train:", metrics(y_train, y_train_pred))
     print("Test :", metrics(y_test, y_test_pred))
 
-
+# A4. Perform k-means clustering on your data. Please remove / ignore the target variable for 
+# performing clustering. Sample code suggested below.
 # ---------------------- Q4: Simple KMeans ----------------------
 def simple_kmeans():
     df_cls, _ = load_classification_data()
@@ -113,7 +117,7 @@ def simple_kmeans():
     print("Cluster Labels:", np.unique(kmeans.labels_))
     print("Cluster Centers:\n", kmeans.cluster_centers_)
 
-
+# A5. For the clustering done in A4, calculate the: (i) Silhouette Score, (ii) CH Score and (iii) DB Index.
 # ---------------------- Q5: KMeans with Metrics ----------------------
 def kmeans_with_metrics():
     df_cls, _ = load_classification_data()
@@ -127,7 +131,8 @@ def kmeans_with_metrics():
     print("Davies-Bouldin Index:", davies_bouldin_score(X, labels))
     print("Centers:\n", kmeans.cluster_centers_)
 
-
+# A6. Perform k-means clustering for different values of k. Evaluate the above scores for each k value. 
+# Make a plot of the values against the k value to determine the optimal cluster count. 
 # ---------------------- Q6: KMeans Metrics across K ----------------------
 def kmeans_metrics_vs_k():
     df_cls, _ = load_classification_data()
@@ -148,7 +153,7 @@ def kmeans_metrics_vs_k():
     plt.subplot(1, 3, 3); plt.plot(k_values, db, marker='o', color='r'); plt.title("DB Index vs K")
     plt.tight_layout(); plt.show()
 
-
+# A7. Using elbow plot, determine the optimal k value for k-means clustering. Use below code. 
 # ---------------------- Q7: Elbow Method ----------------------
 def elbow_method():
     df_cls, _ = load_classification_data()
@@ -182,3 +187,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
